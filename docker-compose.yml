@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  commentbot:
+    build: .
+    ports:
+      - "65432:65432"
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    environment:
+      - DISPLAY=:99
+    command: python main.py server
+    
+  commentbot-gui:
+    build: .
+    ports:
+      - "65432:65432"
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=${DISPLAY}
+    network_mode: host
+    command: python main.py
