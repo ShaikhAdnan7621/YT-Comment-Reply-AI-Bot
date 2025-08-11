@@ -1,0 +1,58 @@
+{
+    "manifest_version": 3,
+    "name": "My First Extension",
+    "description": "This is my first Chrome extension!",
+    "version": "1.0",
+    "permissions": [
+        "storage",
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
+        "https://www.youtube.com/*",
+        "https://studio.youtube.com/*",
+        "https://www.facebook.com/*",
+        "https://www.instagram.com/*",
+        "https://www.meta.com/*"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icons/icon16.png",
+            "48": "icons/icon48.png",
+            "128": "icons/icon128.png"
+        }
+    },
+    "icons": {
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://www.youtube.com/*"],
+            "js": ["contentScripts/youtube.js"],
+            "run_at": "document_start"
+        },
+        {
+            "matches": ["https://studio.youtube.com/*"],
+            "js": ["contentScripts/youtubeStudio.js", "contentScripts/buttonLogger.js"],
+            "run_at": "document_start"
+        },
+        {
+            "matches": ["https://www.facebook.com/*"],
+            "js": ["contentScripts/facebook.js"],
+            "run_at": "document_start"
+        },
+        {
+            "matches": ["https://www.instagram.com/*"],
+            "js": ["contentScripts/instagram.js"],
+            "run_at": "document_start"
+        },
+        {
+            "matches": ["https://www.meta.com/*"],
+            "js": ["contentScripts/meta.js"],
+            "run_at": "document_start"
+        }
+    ]
+}
